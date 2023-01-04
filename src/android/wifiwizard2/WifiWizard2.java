@@ -2126,10 +2126,12 @@ public class WifiWizard2 extends CordovaPlugin {
             suggestionsList.add(suggestion);
 
             final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-
+            
+            final int statusRemove = wifiManager.removeNetworkSuggestions(suggestionsList);
             final int status = wifiManager.addNetworkSuggestions(suggestionsList);
-            if (status != WifiManager.STATUS_NETWORK_SUGGESTIONS_SUCCESS) {
-                callbackContext.error("STATUS_NETWORK_SUGGESTIONS_ERROR");
+            
+            if (status != WifiManager.STATUS_NETWORK_SUGGESTIONS_SUCCESS && status != WifiManager.STATUS_NETWORK_SUGGESTIONS_ERROR_ADD_DUPLICATE) {
+                callbackContext.error(status);
                 return;
             }
             callbackContext.success("STATUS_NETWORK_SUGGESTIONS_ADDED");
