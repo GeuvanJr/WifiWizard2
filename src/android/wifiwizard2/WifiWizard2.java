@@ -2103,10 +2103,15 @@ public class WifiWizard2 extends CordovaPlugin {
             String PASS = data.getString(1);
             String Algorithm = data.getString(2);
             Boolean isHidden = data.getBoolean(3);
-
+            String Username = data.getString(4);
+            
             WifiNetworkSuggestion.Builder builder = new WifiNetworkSuggestion.Builder();
             builder.setSsid(SSID);
             builder.setIsAppInteractionRequired(false);
+            
+            if (isHidden) {
+                builder.setIsHiddenSsid(true);
+            }
 
             if (Algorithm.matches("/WEP|WPA|WPA2/gim") && PASS.length() > 0) {
                 builder.setWpa2Passphrase(PASS);
@@ -2115,10 +2120,15 @@ public class WifiWizard2 extends CordovaPlugin {
             if (Algorithm.matches("/WPA3/gim") && !PASS.isEmpty()) {
                 builder.setWpa3Passphrase(PASS);
             }
-
-            if (isHidden) {
-                builder.setIsHiddenSsid(true);
+            
+            if (Algorithm.matches("/EAP/gim") && !PASS.isEmpty() && !Username.isEmpty()) {
+                WifiEnterpriseConfig enterpriseConfig = new WifiEnterpriseConfig(); 
+                enterpriseConfig.setIdentity(Username);
+                enterpriseConfig.setPassword(PASS);
+                enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
+                builder.setWpa2EnterpriseConfig(enterpriseConfig);
             }
+
 
             WifiNetworkSuggestion suggestion = builder.build();
 
