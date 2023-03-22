@@ -2127,7 +2127,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);
             } else {
                 
-                callbackContext.error();
+                callbackContext.error("AUTH_TYPE_NOT_SUPPORTED");
                 return;
            
             }
