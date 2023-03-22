@@ -2104,10 +2104,7 @@ public class WifiWizard2 extends CordovaPlugin {
             String Algorithm = data.getString(2);
             Boolean isHidden = data.getBoolean(3);
             String Identity = data.getString(4);
-            
-            callbackContext.error(SSID + "-" + PASS + "-" + Algorithm + "-" + isHidden + "-" + Identity);
-            return;
-            
+                        
             WifiNetworkSuggestion.Builder builder = new WifiNetworkSuggestion.Builder();
             builder.setSsid(SSID);
             builder.setIsAppInteractionRequired(false);
@@ -2130,7 +2127,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);
                 
             } else {
-                callbackContext.error("AUTH_TYPE_NOT_SUPPORTED");
+                callbackContext.error(SSID + "-" + PASS + "-" + Algorithm + "-" + isHidden + "-" + Identity);
                 return;
             }
 
