@@ -683,7 +683,7 @@ var WifiWizard2 = {
  *
  * @param {string|int} [SSID]
  * @param {string} [password=]
- * @param {string} [alhorithm=OPEN] OPEN|WEP|WPA|WPA2|WPA3
+ * @param {string} [alhorithm=OPEN] OPEN|WEP|WPA|WPA2|WPA3|EAP
  * @param {booleab} [isHiddenSSID]
  * @param {string} [Identity]
  * @returns {Promise<any>}
