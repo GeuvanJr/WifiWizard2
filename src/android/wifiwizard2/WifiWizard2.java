@@ -2115,18 +2115,25 @@ public class WifiWizard2 extends CordovaPlugin {
 
             if (Algorithm.matches("/WEP|WPA|WPA2/gim") && PASS.length() > 0) {
                 builder.setWpa2Passphrase(PASS);
-            }
-
-            if (Algorithm.matches("/WPA3/gim") && !PASS.isEmpty()) {
+                
+            } else if  (Algorithm.matches("/WPA3/gim") && PASS.length() > 0) {
                 builder.setWpa3Passphrase(PASS);
-            }
-            
-            if (Algorithm.matches("/EAP/gim") && !PASS.isEmpty() && !Username.isEmpty()) {
+                
+            } else if (Algorithm.matches("/EAP/gim") && PASS.length() > 0 && Username.length() > 0) {
                 WifiEnterpriseConfig enterpriseConfig = new WifiEnterpriseConfig(); 
                 enterpriseConfig.setIdentity(Username);
                 enterpriseConfig.setPassword(PASS);
                 enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);
+                
+                  Log.d(TAG, "Wifi Authentication Type Not Supported.");
+                callbackContext.error(Username);
+                return false;
+                
+            } else {
+                Log.d(TAG, "Wifi Authentication Type Not Supported.");
+                callbackContext.error("AUTH_TYPE_NOT_SUPPORTED");
+                return false;
             }
 
 
@@ -2144,7 +2151,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 callbackContext.error(status);
                 return;
             }
-            callbackContext.success(SSID + '-' + PASS  + '-' + Algorithm + '-' + isHidden + '-' + Username + "STATUS_NETWORK_SUGGESTIONS_ADDED");
+            callbackContext.success("STATUS_NETWORK_SUGGESTIONS_ADDED");
             
             //TODO: check when device is connected
 
