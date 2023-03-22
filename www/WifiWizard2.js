@@ -682,15 +682,14 @@ var WifiWizard2 = {
  * Author: Mathias Scavello (info at mathiasscavello dot com)
  *
  * @param {string|int} [SSID]
- * @param {string} [password=]
- * @param {string} [alhorithm=OPEN] OPEN|WEP|WPA|WPA2|WPA3|EAP
+ * @param {string} [password]
+ * @param {string} [algorithm]
  * @param {booleab} [isHiddenSSID]
  * @param {string} [Identity]
  * @returns {Promise<any>}
  */
   suggestConnection: function (SSID, password, algorithm, isHiddenSSID, Identity) {
     isHiddenSSID = isHiddenSSID ? true : false;
-    algorithm = algorithm ? algorithm : 'NONE';
 
     return new Promise(function (resolve, reject) {
       if (!SSID) {
