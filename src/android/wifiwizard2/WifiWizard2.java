@@ -2126,12 +2126,11 @@ public class WifiWizard2 extends CordovaPlugin {
                 enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);
                 
-                  Log.d(TAG, "Wifi Authentication Type Not Supported.");
-                callbackContext.error(Username);
+                callbackContext.error(data.getString(4));
                 return false;
                 
             } else {
-                Log.d(TAG, "Wifi Authentication Type Not Supported.");
+
                 callbackContext.error("AUTH_TYPE_NOT_SUPPORTED");
                 return false;
             }
