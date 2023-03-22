@@ -2113,15 +2113,13 @@ public class WifiWizard2 extends CordovaPlugin {
                 builder.setIsHiddenSsid(true);
             }
 
-            
-            
-            if (Algorithm.matches("/WEP|WPA|WPA2/gim") && PASS.length() > 0) {
+            if (Algorithm.matches("WEP|WPA|WPA2") && PASS.length() > 0) {
                 builder.setWpa2Passphrase(PASS);
                 
-            } else if  (Algorithm.matches("/WPA3/gim") && PASS.length() > 0) {
+            } else if  (Algorithm.matches("WPA3") && PASS.length() > 0) {
                 builder.setWpa3Passphrase(PASS);
                 
-            } else if (Algorithm.matches("/EAP/gim") && PASS.length() > 0 && Identity.length() > 0) {
+            } else if (Algorithm.matches("EAP") && PASS.length() > 0 && Identity.length() > 0) {
                 WifiEnterpriseConfig enterpriseConfig = new WifiEnterpriseConfig(); 
                 enterpriseConfig.setIdentity(Identity);
                 enterpriseConfig.setPassword(PASS);
@@ -2129,7 +2127,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);
             } else {
                 
-                callbackContext.error(Algorithm.matches("/EAP/gim") + "-" + PASS.length() + "-" + Identity.length());
+                callbackContext.error();
                 return;
            
             }
