@@ -685,6 +685,7 @@ var WifiWizard2 = {
  * @param {string} [password=]
  * @param {string} [alhorithm=OPEN] OPEN|WEP|WPA|WPA2|WPA3
  * @param {booleab} [isHiddenSSID]
+ * @param {string|int} [Username]
  * @returns {Promise<any>}
  */
   suggestConnection: function (SSID, password, algorithm, isHiddenSSID, Username) {
