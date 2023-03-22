@@ -2128,7 +2128,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 
             } else {
                 callbackContext.error("AUTH_TYPE_NOT_SUPPORTED");
-                return false;
+                return;
             }
 
 
