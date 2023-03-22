@@ -2112,27 +2112,28 @@ public class WifiWizard2 extends CordovaPlugin {
             if (isHidden) {
                 builder.setIsHiddenSsid(true);
             }
+
             
             
-            switch (Algorithm) {
-                case WEP:
-                case WPA:
-                case WPA2:
-                    builder.setWpa2Passphrase(PASS);
-                case WPA3:
-                    builder.setWpa3Passphrase(PASS);
-                case EAP:
-                    WifiEnterpriseConfig enterpriseConfig = new WifiEnterpriseConfig(); 
-                    enterpriseConfig.setIdentity(Identity);
-                    enterpriseConfig.setPassword(PASS);
-                    enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
-                    builder.setWpa2EnterpriseConfig(enterpriseConfig);
-                    callbackContext.error(Identity.length() + "-" + PASS.length());
-                default:
-                    callbackContext.error("AUTH_TYPE_NOT_SUPPORTED");
-                    return;
+            if (Algorithm.matches("/WEP|WPA|WPA2/gim") && PASS.length() > 0) {
+                builder.setWpa2Passphrase(PASS);
+                
+            } else if  (Algorithm.matches("/WPA3/gim") && PASS.length() > 0) {
+                builder.setWpa3Passphrase(PASS);
+                
+            } else if (Algorithm.matches("/EAP/gim") && PASS.length() > 0 && Identity.length() > 0) {
+                WifiEnterpriseConfig enterpriseConfig = new WifiEnterpriseConfig(); 
+                enterpriseConfig.setIdentity(Identity);
+                enterpriseConfig.setPassword(PASS);
+                enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
+                builder.setWpa2EnterpriseConfig(enterpriseConfig);
+            } else {
+                
+                callbackContext.error(Algorithm.matches("/EAP/gim") + "-" + PASS.length() + "-" + Identity.length());
+                return;
+           
             }
-            
+
 
             WifiNetworkSuggestion suggestion = builder.build();
 
