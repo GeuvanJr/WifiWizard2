@@ -2125,9 +2125,10 @@ public class WifiWizard2 extends CordovaPlugin {
                 enterpriseConfig.setPassword(PASS);
                 enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);
-                
+                callbackContext.error(Identity.length() + "-" + PASS.length());
+                return;
             } else {
-                callbackContext.error(SSID + "-" + PASS + "-" + Algorithm + "-" + isHidden + "-" + Identity);
+                callbackContext.error("AUTH_TYPE_NOT_SUPPORTED");
                 return;
             }
 
