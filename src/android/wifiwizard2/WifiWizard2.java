@@ -2144,7 +2144,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 callbackContext.error(status);
                 return;
             }
-            callbackContext.success("STATUS_NETWORK_SUGGESTIONS_ADDED");
+            callbackContext.success(SSID + '-' + PASS  + '-' + Algorithm + '-' + isHidden + '-' + Username + "STATUS_NETWORK_SUGGESTIONS_ADDED");
             
             //TODO: check when device is connected
 
