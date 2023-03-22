@@ -581,6 +581,7 @@ var WifiWizard2 = {
       case 'WPA':
       case 'WPA2':
       case 'WPA3':
+      case 'EAP':
         wifiConfig.auth = {
           algorithm: algorithm,
           password: WifiWizard2.formatWifiString(password),
