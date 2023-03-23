@@ -2132,7 +2132,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 //config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_EAP);
                 //builder.setUntrusted(false);
                 
-                builder.setIsUserpInteractionRequired(true);
+                //builder.setIsUserpInteractionRequired(true);
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);
             } else {
                 
