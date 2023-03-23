@@ -2124,10 +2124,15 @@ public class WifiWizard2 extends CordovaPlugin {
                 enterpriseConfig.setIdentity(Identity);
                 enterpriseConfig.setPassword(PASS);
                 enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
+                enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
+                enterpriseConfig.isEapMethodServerCertUsed(false);
+                
+                
                 //config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.IEEE8021X);   
                 //config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_EAP);
+                //builder.setUntrusted(false);
                 
-                builder.setUntrusted(false);
+                builder.setIsUserpInteractionRequired(true);
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);
             } else {
                 
