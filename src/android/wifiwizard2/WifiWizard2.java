@@ -2108,6 +2108,7 @@ public class WifiWizard2 extends CordovaPlugin {
             WifiNetworkSuggestion.Builder builder = new WifiNetworkSuggestion.Builder();
             builder.setSsid(SSID);
             builder.setIsAppInteractionRequired(false);
+            builder.setUntrusted(false);
             
             if (isHidden) {
                 builder.setIsHiddenSsid(true);
