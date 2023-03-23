@@ -2149,6 +2149,9 @@ public class WifiWizard2 extends CordovaPlugin {
 
             final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             
+            wifiManager.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
+            wifiManager.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
+            
             final int statusRemove = wifiManager.removeNetworkSuggestions(suggestionsList);
             final int status = wifiManager.addNetworkSuggestions(suggestionsList);
             
