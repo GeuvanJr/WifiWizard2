@@ -2101,7 +2101,7 @@ public class WifiWizard2 extends CordovaPlugin {
         try {
             String SSID = data.getString(0);
             String PASS = data.getString(1);
-            String Algorithm = data.getString(2);
+            String Algorithm = data.getString(2).toUpperCase();
             Boolean isHidden = data.getBoolean(3);
             String Identity = data.getString(4);
                         
