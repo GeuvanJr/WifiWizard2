@@ -2107,8 +2107,8 @@ public class WifiWizard2 extends CordovaPlugin {
                         
             WifiNetworkSuggestion.Builder builder = new WifiNetworkSuggestion.Builder();
             builder.setSsid(SSID);
-            builder.setIsAppInteractionRequired(false);
-            builder.setUntrusted(false);
+            //builder.setIsAppInteractionRequired(false);
+            
             
             if (isHidden) {
                 builder.setIsHiddenSsid(true);
@@ -2126,15 +2126,13 @@ public class WifiWizard2 extends CordovaPlugin {
                 enterpriseConfig.setPassword(PASS);
                 enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
                 enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
+                builder.setUntrusted(false);
                 
-                
+                //builder.setIsUserpInteractionRequired(true);
+                builder.setWpa2EnterpriseConfig(enterpriseConfig);                
                 
                 //config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.IEEE8021X);   
                 //config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_EAP);
-                //builder.setUntrusted(false);
-                
-                //builder.setIsUserpInteractionRequired(true);
-                builder.setWpa2EnterpriseConfig(enterpriseConfig);
             } else {
                 
                 callbackContext.error("AUTH_TYPE_NOT_SUPPORTED");
