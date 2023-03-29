@@ -2126,7 +2126,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 enterpriseConfig.setPassword(PASS);
                 enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
                 enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
-                enterpriseConfig.DomainSuffixMatch("slbenfica.pt")
+                enterpriseConfig.DomainSuffixMatch("slbenfica.pt");
                 builder.setUntrusted(false);
                 
                 //builder.setIsUserpInteractionRequired(true);
