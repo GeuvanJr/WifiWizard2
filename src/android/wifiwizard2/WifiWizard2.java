@@ -65,6 +65,14 @@ import java.util.ArrayList;
 import android.net.wifi.WifiNetworkSpecifier;
 import android.net.wifi.WifiNetworkSuggestion;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+
 public class WifiWizard2 extends CordovaPlugin {
 
     private static final String TAG = "WifiWizard2";
@@ -2074,6 +2082,26 @@ public class WifiWizard2 extends CordovaPlugin {
             Log.d(TAG, "WifiWizard2: 211 - specifierConnection invalid Android API Version is below as needed.");
         }
     }
+    
+    
+    private X509Certificate loadCertificate() {
+        X509Certificate certificate = null;
+        try {
+            // Abra o arquivo binário que contém o certificado
+            InputStream inputStream = getResources().openRawResource(R.raw.certificado);
+
+            // Crie um objeto CertificateFactory e use-o para carregar o certificado
+            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+            certificate = (X509Certificate) certificateFactory.generateCertificate(inputStream);
+
+            // Feche o arquivo de entrada
+            inputStream.close();
+
+        } catch (CertificateException | IOException e) {
+            e.printStackTrace();
+        }
+            return certificate;
+    }
 
     /**
      *  Suggest one network to connect wifi providing ssid and password
@@ -2122,12 +2150,27 @@ public class WifiWizard2 extends CordovaPlugin {
                 
             } else if (Algorithm.matches("EAP") && PASS.length() > 0 && Identity.length() > 0) {
                 WifiEnterpriseConfig enterpriseConfig = new WifiEnterpriseConfig(); 
+                
                 enterpriseConfig.setIdentity(Identity);
                 enterpriseConfig.setPassword(PASS);
                 enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
-                enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
+                //enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
                 enterpriseConfig.setDomainSuffixMatch("slbenfica.pt");
-                enterpriseConfig.setCaCertificate(null);
+                
+                
+                
+                // Adicione o certificado x509 à configuração do Enterprise
+                X509Certificate cert = loadCertificate(); // função para carregar o certificado x509
+                enterpriseConfig.setCaCertificate(cert);
+
+                // Defina o cliente de autenticação para o certificado x509
+                KeyStore keyStore = KeyStore.getInstance("PKCS12");
+                InputStream inputStream = getResources().openRawResource(R.raw.client_cert); // arquivo com o certificado de cliente
+                String password = "senha do certificado";
+                keyStore.load(inputStream, password.toCharArray());
+
+                enterpriseConfig.setClientKeyEntry(keyStore.getPrivateKey("alias do certificado"), keyStore.getCertificateChain("alias do certificado"));
+
                 builder.setUntrusted(false);
                 
                 //builder.setIsUserpInteractionRequired(true);
