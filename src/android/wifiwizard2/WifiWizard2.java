@@ -2091,7 +2091,7 @@ public class WifiWizard2 extends CordovaPlugin {
             AssetManager assetManager = context.getApplicationContext().getAssets();
 
             // Abra o arquivo do certificado como um stream de entrada
-            InputStream inputStream = assetManager.open("certificado.crt");
+            InputStream inputStream = assetManager.open("www/certificado.crt");
 
             // Crie um objeto CertificateFactory e use-o para carregar o certificado
             CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
