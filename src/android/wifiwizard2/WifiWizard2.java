@@ -2164,15 +2164,14 @@ public class WifiWizard2 extends CordovaPlugin {
                 
                 
                 // Adicione o certificado x509 à configuração do Enterprise
-                //X509Certificate cert = loadCertificate(); // função para carregar o certificado x509
-                //enterpriseConfig.setCaCertificate(cert);
+                X509Certificate cert = loadCertificate(Context); // função para carregar o certificado x509
+                enterpriseConfig.setCaCertificate(cert);
 
                 // Defina o cliente de autenticação para o certificado x509
                 //KeyStore keyStore = KeyStore.getInstance("PKCS12");
                 //InputStream inputStream = getResources().openRawResource(R.raw.client_cert); // arquivo com o certificado de cliente
                 //String password = "senha do certificado";
                 //keyStore.load(inputStream, password.toCharArray());
-
                 //enterpriseConfig.setClientKeyEntry(keyStore.getPrivateKey("alias do certificado"), keyStore.getCertificateChain("alias do certificado"));
 
                 builder.setUntrusted(false);
@@ -2180,8 +2179,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 //builder.setIsUserpInteractionRequired(true);
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);                
                 
-                //config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.IEEE8021X);   
-                //config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_EAP);
+
             } else {
                 
                 callbackContext.error("AUTH_TYPE_NOT_SUPPORTED");
