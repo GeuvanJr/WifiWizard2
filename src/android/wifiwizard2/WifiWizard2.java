@@ -2087,21 +2087,25 @@ public class WifiWizard2 extends CordovaPlugin {
     private X509Certificate loadCertificate() {
         X509Certificate certificate = null;
         try {
-            // Abra o arquivo binário que contém o certificado
-            InputStream inputStream = getResources().openRawResource(R.raw.certificado);
+            // Obtenha o AssetManager do contexto do aplicativo
+            AssetManager assetManager = getApplicationContext().getAssets();
+
+            // Abra o arquivo do certificado como um stream de entrada
+            InputStream inputStream = assetManager.open("certificado.crt");
 
             // Crie um objeto CertificateFactory e use-o para carregar o certificado
             CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
             certificate = (X509Certificate) certificateFactory.generateCertificate(inputStream);
 
-            // Feche o arquivo de entrada
+            // Feche o stream de entrada
             inputStream.close();
 
         } catch (CertificateException | IOException e) {
             e.printStackTrace();
         }
-            return certificate;
+        return certificate;
     }
+
 
     /**
      *  Suggest one network to connect wifi providing ssid and password
