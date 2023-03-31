@@ -2167,8 +2167,6 @@ public class WifiWizard2 extends CordovaPlugin {
                 X509Certificate cert = loadCertificate(context); // função para carregar o certificado x509
                 enterpriseConfig.setCaCertificate(cert);
                 
-                callbackContext.error(Objects.isNull(cert));
-                return;
 
                 // Defina o cliente de autenticação para o certificado x509
                 //KeyStore keyStore = KeyStore.getInstance("PKCS12");
