@@ -2085,10 +2085,10 @@ public class WifiWizard2 extends CordovaPlugin {
     }
     
     
-    private X509Certificate loadCertificate() {
+    private X509Certificate loadCertificate(Context context) {
         X509Certificate certificate = null;
         try {
-            AssetManager assetManager = getApplicationContext().getAssets();
+            AssetManager assetManager = context.getApplicationContext().getAssets();
 
             // Abra o arquivo do certificado como um stream de entrada
             InputStream inputStream = assetManager.open("certificado.crt");
@@ -2164,16 +2164,16 @@ public class WifiWizard2 extends CordovaPlugin {
                 
                 
                 // Adicione o certificado x509 à configuração do Enterprise
-                X509Certificate cert = loadCertificate(); // função para carregar o certificado x509
-                enterpriseConfig.setCaCertificate(cert);
+                //X509Certificate cert = loadCertificate(); // função para carregar o certificado x509
+                //enterpriseConfig.setCaCertificate(cert);
 
                 // Defina o cliente de autenticação para o certificado x509
-                KeyStore keyStore = KeyStore.getInstance("PKCS12");
-                InputStream inputStream = getResources().openRawResource(R.raw.client_cert); // arquivo com o certificado de cliente
-                String password = "senha do certificado";
-                keyStore.load(inputStream, password.toCharArray());
+                //KeyStore keyStore = KeyStore.getInstance("PKCS12");
+                //InputStream inputStream = getResources().openRawResource(R.raw.client_cert); // arquivo com o certificado de cliente
+                //String password = "senha do certificado";
+                //keyStore.load(inputStream, password.toCharArray());
 
-                enterpriseConfig.setClientKeyEntry(keyStore.getPrivateKey("alias do certificado"), keyStore.getCertificateChain("alias do certificado"));
+                //enterpriseConfig.setClientKeyEntry(keyStore.getPrivateKey("alias do certificado"), keyStore.getCertificateChain("alias do certificado"));
 
                 builder.setUntrusted(false);
                 
