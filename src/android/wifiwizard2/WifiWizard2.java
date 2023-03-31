@@ -72,6 +72,7 @@ import java.io.InputStream;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import android.content.res.AssetManager;
 
 public class WifiWizard2 extends CordovaPlugin {
 
@@ -2087,7 +2088,6 @@ public class WifiWizard2 extends CordovaPlugin {
     private X509Certificate loadCertificate() {
         X509Certificate certificate = null;
         try {
-            // Obtenha o AssetManager do contexto do aplicativo
             AssetManager assetManager = getApplicationContext().getAssets();
 
             // Abra o arquivo do certificado como um stream de entrada
