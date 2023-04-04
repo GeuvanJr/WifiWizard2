@@ -2139,7 +2139,7 @@ public class WifiWizard2 extends CordovaPlugin {
                         
             WifiNetworkSuggestion.Builder builder = new WifiNetworkSuggestion.Builder();
             builder.setSsid(SSID);
-            //builder.setIsAppInteractionRequired(false);
+            builder.setIsAppInteractionRequired(false);
             
             
             if (isHidden) {
@@ -2158,28 +2158,11 @@ public class WifiWizard2 extends CordovaPlugin {
                 enterpriseConfig.setIdentity(Identity);
                 enterpriseConfig.setPassword(PASS);
                 enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
-                //enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
+                enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
+                enterpriseConfig.setCaCertificate(loadCertificate(context));
                 enterpriseConfig.setDomainSuffixMatch("slbenfica.pt");
-                
-                
-                
-                // Adicione o certificado x509 à configuração do Enterprise
-                X509Certificate cert = loadCertificate(context); // função para carregar o certificado x509
-                enterpriseConfig.setCaCertificate(cert);
-                
-
-                // Defina o cliente de autenticação para o certificado x509
-                //KeyStore keyStore = KeyStore.getInstance("PKCS12");
-                //InputStream inputStream = getResources().openRawResource(R.raw.client_cert); // arquivo com o certificado de cliente
-                //String password = "senha do certificado";
-                //keyStore.load(inputStream, password.toCharArray());
-                //enterpriseConfig.setClientKeyEntry(keyStore.getPrivateKey("alias do certificado"), keyStore.getCertificateChain("alias do certificado"));
-
-                builder.setUntrusted(false);
-                
-                //builder.setIsUserpInteractionRequired(true);
+                               
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);                
-                
 
             } else {
                 
