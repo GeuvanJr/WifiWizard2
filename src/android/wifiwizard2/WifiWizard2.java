@@ -76,6 +76,7 @@ import android.content.res.AssetManager;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 
 public class WifiWizard2 extends CordovaPlugin {
 
