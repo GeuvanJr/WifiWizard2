@@ -2182,7 +2182,7 @@ public class WifiWizard2 extends CordovaPlugin {
 
                 // Set the CA certificate and the client certificate and private key for mutual authentication
                 enterpriseConfig.setCaCertificate(certificateChain[1]);
-                enterpriseConfig.setClientKeyEntry(privateKey, certificateChain);
+                enterpriseConfig.setClientKeyEntry(privateKey, certificateChain[1]);
                 
                  
                 //enterpriseConfig.setCaCertificate(loadCertificate(context));
