@@ -2139,7 +2139,7 @@ public class WifiWizard2 extends CordovaPlugin {
         } catch (CertificateException | KeyStoreException | NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();
         }       
-        return alias;
+        return certificateChain[0].getType();
     }
 
 
