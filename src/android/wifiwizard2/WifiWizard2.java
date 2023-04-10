@@ -2107,7 +2107,7 @@ public class WifiWizard2 extends CordovaPlugin {
             // Feche o stream de entrada
             inputStream.close();
 
-        } catch (CertificateException | IOException e) {
+        } catch (CertificateException | KeyStoreException | IOException e) {
             e.printStackTrace();
         }       
         return certificate;
