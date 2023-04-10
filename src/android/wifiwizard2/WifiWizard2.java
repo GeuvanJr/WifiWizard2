@@ -2102,7 +2102,7 @@ public class WifiWizard2 extends CordovaPlugin {
             InputStream inputStream = assetManager.open("www/certificado.p12");
       
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
-            keyStore.load(inputStream, "abc123teste".toCharArray());
+            keyStore.load(inputStream, "Reconquista37$".toCharArray());
             String alias = keyStore.aliases().nextElement();
             Certificate[] certificateChain = keyStore.getCertificateChain(alias);
             certificate = (X509Certificate) certificateChain[0];
@@ -2129,7 +2129,7 @@ public class WifiWizard2 extends CordovaPlugin {
             InputStream inputStream = assetManager.open("www/certificado.p12");
       
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
-            keyStore.load(inputStream, "abc123teste".toCharArray());
+            keyStore.load(inputStream, "Reconquista37$".toCharArray());
             alias = keyStore.aliases().nextElement();
             certificateChain = keyStore.getCertificateChain(alias);
             certificate = (X509Certificate) certificateChain[0];
@@ -2168,7 +2168,7 @@ public class WifiWizard2 extends CordovaPlugin {
 
         final Context context = cordova.getActivity().getApplicationContext();
         try {
-            /*String SSID = data.getString(0);
+            String SSID = data.getString(0);
             String PASS = data.getString(1);
             String Algorithm = data.getString(2).toUpperCase();
             Boolean isHidden = data.getBoolean(3);
@@ -2229,9 +2229,7 @@ public class WifiWizard2 extends CordovaPlugin {
             callbackContext.success("STATUS_NETWORK_SUGGESTIONS_ADDED");
             
             //TODO: check when device is connected
-*/
-                            callbackContext.error(loadCertificate2(context));
-                return;
+
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             Log.d(TAG, e.getMessage());
