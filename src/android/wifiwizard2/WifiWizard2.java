@@ -2102,7 +2102,7 @@ public class WifiWizard2 extends CordovaPlugin {
             keyStore.load(inputStream, "abc123teste".toCharArray());
             String alias = keyStore.aliases().nextElement();
             Certificate[] certificateChain = keyStore.getCertificateChain(alias);
-            X509Certificate certificate = (X509Certificate) certificateChain[0];
+            certificate = (X509Certificate) certificateChain[0];
 
         } catch (CertificateException | IOException e) {
             e.printStackTrace();
