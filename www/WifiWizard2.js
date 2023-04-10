@@ -40,7 +40,6 @@ var WifiWizard2 = {
     });
   },
   
-  var WifiWizard2 = {
   /**
    * Connect to network on iOS device 
    * Using WPA2-Enterprise
@@ -49,7 +48,7 @@ var WifiWizard2 = {
    * @param ssidUsername      Username if connecting to WPA/WPA2 network 
    * @param ssidEAPType      EAPType: kSecAttrAuthenticationTypeEAPTTLS or kSecAttrAuthenticationTypePEAP
    * @returns {Promise}
-   */
+
   iOSConnectNetworkEnterprise: function (ssid, ssidPassword, ssidUsername, ssidEAPType) {
     return new Promise(function (resolve, reject) {
       if (ssidPassword === undefined || !ssidPassword || ssidPassword.length < 1) {
@@ -72,7 +71,7 @@ var WifiWizard2 = {
         ]);
       }
     });
-  },
+  },   */
 
   /**
    * Disconnect from SSID on iOS device
