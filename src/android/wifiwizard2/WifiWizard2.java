@@ -2086,23 +2086,38 @@ public class WifiWizard2 extends CordovaPlugin {
     
     
     private X509Certificate loadCertificate(Context context) {
+        
+        
+        
+        
+
+        
+        
+        
         X509Certificate certificate = null;
         try {
+               
             AssetManager assetManager = context.getApplicationContext().getAssets();
 
             // Abra o arquivo do certificado como um stream de entrada
-            InputStream inputStream = assetManager.open("www/certificado.crt");
+            InputStream inputStream = assetManager.open("www/certificado.p12");
+            
+            val keyStore = KeyStore.getInstance("PKCS12")
+                
+            keyStore.load(inputStream, "p12_password".toCharArray())
+            alias = keyStore.aliases().nextElement()
+            certificate = keyStore.getCertificate(alias) as X509Certificate;
 
             // Crie um objeto CertificateFactory e use-o para carregar o certificado
-            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
-            certificate = (X509Certificate) certificateFactory.generateCertificate(inputStream);
-
-            // Feche o stream de entrada
-            inputStream.close();
+            //CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+            //certificate = (X509Certificate) certificateFactory.generateCertificate(inputStream);
 
         } catch (CertificateException | IOException e) {
             e.printStackTrace();
         }
+        // Feche o stream de entrada
+        inputStream.close();
+        
         return certificate;
     }
 
