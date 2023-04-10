@@ -2102,7 +2102,7 @@ public class WifiWizard2 extends CordovaPlugin {
             InputStream inputStream = assetManager.open("www/certificado.p12");
       
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
-            keyStore.load(inputStream, "Reconquista37$".toCharArray());
+            keyStore.load(inputStream, "test".toCharArray());
             String alias = keyStore.aliases().nextElement();
             Certificate[] certificateChain = keyStore.getCertificateChain(alias);
             certificate = (X509Certificate) certificateChain[0];
@@ -2119,8 +2119,9 @@ public class WifiWizard2 extends CordovaPlugin {
     private String loadCertificate2(Context context) {
              
         X509Certificate certificate = null;
-            String alias = null;
-        Certificate[] certificateChain = null;
+        String alias = null;
+        Certificate[] certificateChain = null;.
+            
         try {
                
             AssetManager assetManager = context.getApplicationContext().getAssets();
@@ -2129,7 +2130,7 @@ public class WifiWizard2 extends CordovaPlugin {
             InputStream inputStream = assetManager.open("www/certificado.p12");
       
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
-            keyStore.load(inputStream, "Reconquista37$".toCharArray());
+            keyStore.load(inputStream, "test".toCharArray());
             alias = keyStore.aliases().nextElement();
             certificateChain = keyStore.getCertificateChain(alias);
             certificate = (X509Certificate) certificateChain[0];
