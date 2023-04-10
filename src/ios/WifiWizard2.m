@@ -37,27 +37,26 @@
     return [cset countForObject:@"awdl0"] > 1 ? YES : NO;
 }
 
-- (void)iOSConnectNetworkEnterprise:(CDVInvokedUrlCommand*)command {
+- (void)iOSConnectNetwork:(CDVInvokedUrlCommand*)command {
     __block CDVPluginResult *pluginResult = nil;
 
-    NSString * ssidString;
-    NSString * usernameString;
-    NSString * passwordString;
-    NSString * eapTypeString;
-    NSDictionary* options = [[NSDictionary alloc]init];
+    NSString *ssidString;
+    NSString *usernameString;
+    NSString *passwordString;
+    NSString *eapTypeString;
+    NSDictionary *options = [command argumentAtIndex:0];
 
-    options = [command argumentAtIndex:0];
     ssidString = [options objectForKey:@"Ssid"];
     usernameString = [options objectForKey:@"Username"];
     passwordString = [options objectForKey:@"Password"];
-    eapTypeString = [options objectForKey:@"EapType"]; // Should be "TLS" or "PEAP"
+    eapTypeString = [options objectForKey:@"EapType"];
 
     if (@available(iOS 11.0, *)) {
         if (ssidString && [ssidString length]) {
             NSMutableDictionary *eapSettings = [[NSMutableDictionary alloc] init];
-            [eapSettings setObject:usernameString forKey:(__bridge id)(kNEHotspotConfigurationEAPUsername)];
-            [eapSettings setObject:passwordString forKey:(__bridge id)(kNEHotspotConfigurationEAPPassword)];
-            [eapSettings setObject:eapTypeString forKey:(__bridge id)(kNEHotspotConfigurationEAPType)];
+            [eapSettings setObject:usernameString forKey:(__bridge id)kNEHotspotConfigurationEAPUsername];
+            [eapSettings setObject:passwordString forKey:(__bridge id)kNEHotspotConfigurationEAPPassword];
+            [eapSettings setObject:eapTypeString forKey:(__bridge id)kNEHotspotConfigurationEAPType];
 
             NEHotspotEAPSettings *settings = [[NEHotspotEAPSettings alloc] initWithDictionary:eapSettings];
 
@@ -67,7 +66,7 @@
 
             [[NEHotspotConfigurationManager sharedManager] applyConfiguration:configuration completionHandler:^(NSError * _Nullable error) {
                 NSDictionary *r = [self fetchSSIDInfo];
-                NSString *ssid = [r objectForKey:(id)kCNNetworkInfoKeySSID]; // @"SSID"
+                NSString *ssid = [r objectForKey:(id)kCNNetworkInfoKeySSID];
 
                 if ([ssid isEqualToString:ssidString]) {
                     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:ssidString];
@@ -77,7 +76,6 @@
 
                 [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
             }];
-
         } else {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"SSID not provided"];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
