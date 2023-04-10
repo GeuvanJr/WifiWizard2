@@ -42,9 +42,12 @@ var WifiWizard2 = {
   
   var WifiWizard2 = {
   /**
-   * Connect to network on iOS device
+   * Connect to network on iOS device 
+   * Using WPA2-Enterprise
    * @param ssid
-   * @param ssidPassword      Password if connecting to WPA/WPA2 network (omit or use false to connect to open network)
+   * @param ssidPassword      Password if connecting to WPA/WPA2 network 
+   * @param ssidUsername      Username if connecting to WPA/WPA2 network 
+   * @param ssidEAPType      EAPType: kSecAttrAuthenticationTypeEAPTTLS or kSecAttrAuthenticationTypePEAP
    * @returns {Promise}
    */
   iOSConnectNetworkEnterprise: function (ssid, ssidPassword, ssidUsername, ssidEAPType) {
