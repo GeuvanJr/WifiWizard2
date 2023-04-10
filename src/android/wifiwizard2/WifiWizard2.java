@@ -64,15 +64,17 @@ import java.util.ArrayList;
 
 import android.net.wifi.WifiNetworkSpecifier;
 import android.net.wifi.WifiNetworkSuggestion;
+import android.content.res.AssetManager;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import android.content.res.AssetManager;
+import java.util.Collections;
 import java.security.KeyStore;
 
 public class WifiWizard2 extends CordovaPlugin {
