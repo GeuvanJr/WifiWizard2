@@ -2104,7 +2104,7 @@ public class WifiWizard2 extends CordovaPlugin {
             
             val keyStore = KeyStore.getInstance("PKCS12")
                 
-            keyStore.load(inputStream, "p12_password".toCharArray())
+            keyStore.load(inputStream, "abc123teste".toCharArray())
             alias = keyStore.aliases().nextElement()
             certificate = keyStore.getCertificate(alias) as X509Certificate;
 
