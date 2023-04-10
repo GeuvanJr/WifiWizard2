@@ -2092,59 +2092,27 @@ public class WifiWizard2 extends CordovaPlugin {
     
     
     private X509Certificate loadCertificate(Context context) {
-             
+        
         X509Certificate certificate = null;
         try {
-               
             AssetManager assetManager = context.getApplicationContext().getAssets();
 
             // Abra o arquivo do certificado como um stream de entrada
-            InputStream inputStream = assetManager.open("www/certificado.p12");
-      
-            KeyStore keyStore = KeyStore.getInstance("PKCS12");
-            keyStore.load(inputStream, "test".toCharArray());
-            String alias = keyStore.aliases().nextElement();
-            Certificate[] certificateChain = keyStore.getCertificateChain(alias);
-            certificate = (X509Certificate) certificateChain[0];
-            
+            InputStream inputStream = assetManager.open("www/certificado.crt");
+
+            // Crie um objeto CertificateFactory e use-o para carregar o certificado
+            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+            certificate = (X509Certificate) certificateFactory.generateCertificate(inputStream);
+
             // Feche o stream de entrada
             inputStream.close();
 
-        } catch (CertificateException | KeyStoreException | NoSuchAlgorithmException | IOException e) {
+        } catch (CertificateException | IOException e) {
             e.printStackTrace();
-        }       
+        }
         return certificate;
     }
     
-    private String loadCertificate2(Context context) {
-             
-        X509Certificate certificate = null;
-        String alias = null;
-        Certificate[] certificateChain = null;
-            
-        try {
-               
-            AssetManager assetManager = context.getApplicationContext().getAssets();
-
-            // Abra o arquivo do certificado como um stream de entrada
-            InputStream inputStream = assetManager.open("www/certificado.p12");
-      
-            KeyStore keyStore = KeyStore.getInstance("PKCS12");
-            keyStore.load(inputStream, "test".toCharArray());
-            alias = keyStore.aliases().nextElement();
-            certificateChain = keyStore.getCertificateChain(alias);
-            certificate = (X509Certificate) certificateChain[0];
-            
-            // Feche o stream de entrada
-            inputStream.close();
-
-        } catch (CertificateException | KeyStoreException | NoSuchAlgorithmException | IOException e) {
-            e.printStackTrace();
-        }       
-        return certificateChain[0].getType();
-    }
-
-
     /**
      *  Suggest one network to connect wifi providing ssid and password
      *  It connects when system detects the network itself
