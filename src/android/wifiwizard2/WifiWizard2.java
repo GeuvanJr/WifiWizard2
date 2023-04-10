@@ -78,6 +78,7 @@ import java.util.Collections;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchAlgorithmException;
 
 public class WifiWizard2 extends CordovaPlugin {
 
@@ -2109,7 +2110,7 @@ public class WifiWizard2 extends CordovaPlugin {
             // Feche o stream de entrada
             inputStream.close();
 
-        } catch (CertificateException | KeyStoreException | IOException e) {
+        } catch (CertificateException | KeyStoreException | NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();
         }       
         return certificate;
