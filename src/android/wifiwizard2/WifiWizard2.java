@@ -2116,8 +2116,7 @@ public class WifiWizard2 extends CordovaPlugin {
         return certificate;
     }
     
-    {
-        private String loadCertificate2(Context context) {
+    private String loadCertificate2(Context context) {
              
         X509Certificate certificate = null;
             String alias = null;
