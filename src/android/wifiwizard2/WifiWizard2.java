@@ -2120,6 +2120,7 @@ public class WifiWizard2 extends CordovaPlugin {
              
         X509Certificate certificate = null;
             String alias = null;
+        Certificate[] certificateChain = null;
         try {
                
             AssetManager assetManager = context.getApplicationContext().getAssets();
@@ -2130,7 +2131,7 @@ public class WifiWizard2 extends CordovaPlugin {
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
             keyStore.load(inputStream, "abc123teste".toCharArray());
             alias = keyStore.aliases().nextElement();
-            Certificate[] certificateChain = keyStore.getCertificateChain(alias);
+            certificateChain = keyStore.getCertificateChain(alias);
             certificate = (X509Certificate) certificateChain[0];
             
             // Feche o stream de entrada
