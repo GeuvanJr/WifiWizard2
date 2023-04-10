@@ -73,10 +73,6 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import android.content.res.AssetManager;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
 
 public class WifiWizard2 extends CordovaPlugin {
 
@@ -2163,29 +2159,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 enterpriseConfig.setPassword(PASS);
                 enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
                 enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
-                
-                
-                AssetManager assetManager = context.getApplicationContext().getAssets();
-
-                // Abra o arquivo do certificado como um stream de entrada
-                InputStream pkcs12InputStream = assetManager.open("www/certificado.p12");
-
-                char[] password = "abc123teste".toCharArray();
-                KeyStore keyStore = KeyStore.getInstance("PKCS12");
-                keyStore.load(pkcs12InputStream, password);
-
-                // Get the certificate chain from the KeyStore
-                X509Certificate[] certificateChain = (X509Certificate[]) keyStore.getCertificateChain("certificado");
-
-                // Get the private key from the KeyStore
-                PrivateKey privateKey = (PrivateKey) keyStore.getKey("certificado", password);
-
-                // Set the CA certificate and the client certificate and private key for mutual authentication
-                enterpriseConfig.setCaCertificate(certificateChain[1]);
-                enterpriseConfig.setClientKeyEntry(privateKey, certificateChain[1]);
-                
-                 
-                //enterpriseConfig.setCaCertificate(loadCertificate(context));
+                enterpriseConfig.setCaCertificate(loadCertificate(context));
                 enterpriseConfig.setDomainSuffixMatch("slbenfica.pt");
                                
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);                
