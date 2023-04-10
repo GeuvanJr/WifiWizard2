@@ -2166,7 +2166,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
                       
                 enterpriseConfig.setCaCertificate(loadCertificate(context));
-                enterpriseConfig.setDomainSuffixMatch("mit-xperts.com");    
+                enterpriseConfig.setDomainSuffixMatch("slbenfica.pt");
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);                
 
             } else {
