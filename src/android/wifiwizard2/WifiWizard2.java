@@ -2120,7 +2120,7 @@ public class WifiWizard2 extends CordovaPlugin {
              
         X509Certificate certificate = null;
         String alias = null;
-        Certificate[] certificateChain = null;.
+        Certificate[] certificateChain = null;
             
         try {
                
