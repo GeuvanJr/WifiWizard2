@@ -59,7 +59,6 @@ import java.net.NetworkInterface;
 import java.net.HttpURLConnection;
 
 import java.net.UnknownHostException;
-
 import java.util.ArrayList;
 
 import android.net.wifi.WifiNetworkSpecifier;
@@ -70,6 +69,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.File;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
@@ -2103,13 +2103,13 @@ public class WifiWizard2 extends CordovaPlugin {
             String alias = keyStore.aliases().nextElement();
             Certificate[] certificateChain = keyStore.getCertificateChain(alias);
             certificate = (X509Certificate) certificateChain[0];
+            
+            // Feche o stream de entrada
+            inputStream.close();
 
         } catch (CertificateException | IOException e) {
             e.printStackTrace();
-        }
-        // Feche o stream de entrada
-        inputStream.close();
-        
+        }       
         return certificate;
     }
 
