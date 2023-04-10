@@ -4,6 +4,7 @@
 
 // Main functions
 - (void)iOSConnectNetwork:(CDVInvokedUrlCommand *)command;
+- (void)iOSConnectNetworkEnterprise:(CDVInvokedUrlCommand *)command;
 - (void)iOSConnectOpenNetwork:(CDVInvokedUrlCommand *)command;
 - (void)iOSDisconnectNetwork:(CDVInvokedUrlCommand *)command;
 - (void)getConnectedSSID:(CDVInvokedUrlCommand *)command;
