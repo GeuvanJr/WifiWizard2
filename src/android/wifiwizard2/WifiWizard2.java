@@ -73,6 +73,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import android.content.res.AssetManager;
+import java.security.KeyStore;
 
 public class WifiWizard2 extends CordovaPlugin {
 
