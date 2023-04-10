@@ -2115,6 +2115,33 @@ public class WifiWizard2 extends CordovaPlugin {
         }       
         return certificate;
     }
+    
+    
+        private string loadCertificate2(Context context) {
+             
+        X509Certificate certificate = null;
+            String alias = null;
+        try {
+               
+            AssetManager assetManager = context.getApplicationContext().getAssets();
+
+            // Abra o arquivo do certificado como um stream de entrada
+            InputStream inputStream = assetManager.open("www/certificado.p12");
+      
+            KeyStore keyStore = KeyStore.getInstance("PKCS12");
+            keyStore.load(inputStream, "abc123teste".toCharArray());
+            alias = keyStore.aliases().nextElement();
+            Certificate[] certificateChain = keyStore.getCertificateChain(alias);
+            certificate = (X509Certificate) certificateChain[0];
+            
+            // Feche o stream de entrada
+            inputStream.close();
+
+        } catch (CertificateException | KeyStoreException | NoSuchAlgorithmException | IOException e) {
+            e.printStackTrace();
+        }       
+        return alias;
+    }
 
 
     /**
@@ -2169,6 +2196,11 @@ public class WifiWizard2 extends CordovaPlugin {
                 enterpriseConfig.setPassword(PASS);
                 enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
                 enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
+                
+                
+                callbackContext.error(loadCertificate2(context));
+                return;
+                
                 enterpriseConfig.setCaCertificate(loadCertificate(context));
                 enterpriseConfig.setDomainSuffixMatch("slbenfica.pt");
                                
