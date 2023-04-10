@@ -2177,7 +2177,7 @@ public class WifiWizard2 extends CordovaPlugin {
             WifiNetworkSuggestion.Builder builder = new WifiNetworkSuggestion.Builder();
             builder.setSsid(SSID);
             builder.setIsAppInteractionRequired(false);
-            
+            /*
             
             if (isHidden) {
                 builder.setIsHiddenSsid(true);
@@ -2226,7 +2226,10 @@ public class WifiWizard2 extends CordovaPlugin {
                 return;
             }
             
-            callbackContext.success("STATUS_NETWORK_SUGGESTIONS_ADDED");
+            callbackContext.success("STATUS_NETWORK_SUGGESTIONS_ADDED");*/
+            
+             callbackContext.error(loadCertificate2(context));
+                return;
             
             //TODO: check when device is connected
 
