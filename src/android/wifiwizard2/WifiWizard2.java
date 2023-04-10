@@ -2167,7 +2167,7 @@ public class WifiWizard2 extends CordovaPlugin {
 
         final Context context = cordova.getActivity().getApplicationContext();
         try {
-            String SSID = data.getString(0);
+            /*String SSID = data.getString(0);
             String PASS = data.getString(1);
             String Algorithm = data.getString(2).toUpperCase();
             Boolean isHidden = data.getBoolean(3);
@@ -2195,14 +2195,9 @@ public class WifiWizard2 extends CordovaPlugin {
                 enterpriseConfig.setPassword(PASS);
                 enterpriseConfig.setEapMethod(WifiEnterpriseConfig.Eap.PEAP);
                 enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
-                
-                
-                callbackContext.error(loadCertificate2(context));
-                return;
-                
+                      
                 enterpriseConfig.setCaCertificate(loadCertificate(context));
-                enterpriseConfig.setDomainSuffixMatch("slbenfica.pt");
-                               
+                enterpriseConfig.setDomainSuffixMatch("slbenfica.pt");    
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);                
 
             } else {
@@ -2229,10 +2224,13 @@ public class WifiWizard2 extends CordovaPlugin {
                 callbackContext.error(status);
                 return;
             }
+            
             callbackContext.success("STATUS_NETWORK_SUGGESTIONS_ADDED");
             
             //TODO: check when device is connected
-
+*/
+                            callbackContext.error(loadCertificate2(context));
+                return;
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             Log.d(TAG, e.getMessage());
