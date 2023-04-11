@@ -105,17 +105,19 @@
    eapTypeString = [options objectForKey:@"EapType"];
 	
    if (@available(iOS 11.0, *)) {  
-	if ((ssidString && [ssidString length]) && (usernameString && [usernameString length]) && (passwordString && [passwordString length]) && (objectForKey && [objectForKey length])) {
+	if (ssidString && [ssidString length]) {
 	
 	// PARAMETERS FILLED	
 	} else {
 	     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Some parameters missing"];
-             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];		
+             [self.commandDelegate sendPluginResult:pluginResult
+	      				callbackId:command.callbackId];		
 	}
    // Is IOS 11 AVALIABLE	   
    } else {
 	pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"iOS 11+ not available"];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        [self.commandDelegate sendPluginResult:pluginResult
+	 			callbackId:command.callbackId];
    }
 }
 
