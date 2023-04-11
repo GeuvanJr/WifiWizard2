@@ -105,7 +105,7 @@
    eapTypeString = [options objectForKey:@"EapType"];
 	
    if (@available(iOS 11.0, *)) {  
-	if ((ssidString && [ssidString length]) && (usernameString && [usernameString length])) {
+	if ((ssidString && [ssidString length]) && (usernameString && [usernameString length]) && (passwordString && [passwordString length]) && (eapTypeString && [eapTypeString length])) {
 	
 	// PARAMETERS FILLED	
 	} else {
