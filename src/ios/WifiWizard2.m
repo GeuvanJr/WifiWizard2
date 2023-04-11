@@ -114,19 +114,7 @@
 		[configEapSettings setPassword:passwordString];
 		[configEapSettings setTrustExceptions:YES];
 
-		NEHotspotConfiguration *configuration = [[NEHotspotConfiguration alloc] initWithSSID:ssidString eapSettings:configEapSettings];
-		configuration.joinOnce = NO;
-		
-		
-		[[NEHotspotConfigurationManager sharedManager] applyConfiguration:configuration completionHandler:^(NSError * _Nullable error) {
-		    if (error) {
-			NSLog(@"Error connecting to WiFi network: %@", error.localizedDescription);
-			CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
-			[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-		    } else {
-			
-		    }
-		}];	
+	
 		
 		
 	// PARAMETERS FILLED	
