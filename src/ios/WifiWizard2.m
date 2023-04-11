@@ -117,17 +117,35 @@
 		configuration.joinOnce = false;
 		
             	[[NEHotspotConfigurationManager sharedManager] applyConfiguration:configuration completionHandler:^(NSError * _Nullable error) {
-                
-                NSDictionary *r = [self fetchSSIDInfo];
-                NSString *ssid = [r objectForKey:(id)kCNNetworkInfoKeySSID]; //@"SSID"
-                
-                if ([ssid isEqualToString:ssidString]){
-                    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:ssidString];
-                }else{
-                    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description];
-                }
-                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-            }];
+			/*
+			NSDictionary *r = [self fetchSSIDInfo];
+			NSString *ssid = [r objectForKey:(id)kCNNetworkInfoKeySSID]; //@"SSID"
+
+			if ([ssid isEqualToString:ssidString]){
+			    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:ssidString];
+			} else {
+			    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description];
+			}
+			[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];*/
+			
+			
+
+			if (error) {
+				CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
+				[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+				} else {
+					NSDictionary *ssidInfo = [self fetchSSIDInfo];
+					NSString *ssid = [ssidInfo objectForKey:(id)kCNNetworkInfoKeySSID];
+				if ([ssid isEqualToString:ssidString]) {
+				    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:ssidString];
+				    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+				} else {
+				    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Failed to connect to the WiFi network"];
+				    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+				}
+		    	}
+			
+            	}];
 
 	
 		
