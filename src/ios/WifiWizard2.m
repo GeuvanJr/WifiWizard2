@@ -90,7 +90,19 @@
 
 
 - (void)iOSConnectNetworkEnterprise:(CDVInvokedUrlCommand*)command {
+	
+    __block CDVPluginResult *pluginResult = nil;
+	
+    NSString *ssidString;
+    NSString *usernameString;
+    NSString *passwordString;
+    NSString *eapTypeString;
+    NSDictionary *options = [command argumentAtIndex:0];
 
+    ssidString = [options objectForKey:@"Ssid"];
+    usernameString = [options objectForKey:@"Username"];
+    passwordString = [options objectForKey:@"Password"];
+    eapTypeString = [options objectForKey:@"EapType"];
 
 
 }
