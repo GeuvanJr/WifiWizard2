@@ -44,14 +44,15 @@ var WifiWizard2 = {
    * Connect to network on iOS device 
    * Using WPA2-Enterprise
    * @param ssid
-   * @param ssidPassword      Password if connecting to WPA/WPA2 network 
-   * @param ssidUsername      Username if connecting to WPA/WPA2 network 
-   * @param ssidEAPType      EAPType: kSecAttrAuthenticationTypeEAPTTLS or kSecAttrAuthenticationTypePEAP
+   * @param ssidPassword  Password if connecting to WPA/WPA2 network 
+   * @param ssidUsername  Username if connecting to WPA/WPA2 network 
+   * @param ssidEAPType   EAPType: kSecAttrAuthenticationTypeEAPTTLS or kSecAttrAuthenticationTypePEAP
    * @returns {Promise}
-
+  */
+  
   iOSConnectNetworkEnterprise: function (ssid, ssidPassword, ssidUsername, ssidEAPType) {
     return new Promise(function (resolve, reject) {
-      if (ssidPassword === undefined || !ssidPassword || ssidPassword.length < 1) {
+      if (ssid === undefined || !ssid || ssid.length < 1) {
          reject('SSID cannot be null');
       } else if (ssidPassword !== undefined && ssidPassword.length > 0 && ssidPassword.length < 8) {
         reject('WPA/WPA2 password length must be at least 8 characters in length!');
@@ -71,7 +72,7 @@ var WifiWizard2 = {
         ]);
       }
     });
-  },   */
+  }, 
 
   /**
    * Disconnect from SSID on iOS device
