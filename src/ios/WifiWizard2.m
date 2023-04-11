@@ -108,33 +108,15 @@
 	if ((ssidString && [ssidString length]) && (usernameString && [usernameString length]) && (passwordString && [passwordString length]) && (eapTypeString && [eapTypeString length])) {
 	
 		
-		NEHotspotEAPSettings *eapSettings = [[NEHotspotEAPSettings alloc] init];
-		[eapSettings setSupportedEAPTypes:@[eapTypeString]];
-		[eapSettings setUsername:usernameString];
-		[eapSettings setPassword:passwordString];
-		[eapSettings setTrustExceptions:YES];
+		NEHotspotEAPSettings *configEapSettings = [[NEHotspotEAPSettings alloc] init];
+		[configEapSettings setSupportedEAPTypes:@[eapTypeString]];
+		[configEapSettings setUsername:usernameString];
+		[configEapSettings setPassword:passwordString];
+		//[configEapSettings setTrustExceptions:YES];
 
-		NEHotspotConfiguration *configuration = [[NEHotspotConfiguration alloc] initWithSSID:ssidString eapSettings:eapSettings];
+		NEHotspotConfiguration *configuration = [[NEHotspotConfiguration alloc] initWithSSID:ssidString eapSettings:configEapSettings];
 		configuration.joinOnce = NO;
 		
-		
-		[[NEHotspotConfigurationManager sharedManager] applyConfiguration:configuration completionHandler:^(NSError * _Nullable error) {
-		    if (error) {
-			NSLog(@"Error connecting to WiFi network: %@", error.localizedDescription);
-			CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
-			[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-		    } else {
-			NSDictionary *ssidInfo = [self fetchSSIDInfo];
-			NSString *ssid = [ssidInfo objectForKey:(id)kCNNetworkInfoKeySSID];
-			if ([ssid isEqualToString:ssidString]) {
-			    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:ssidString];
-			    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-			} else {
-			    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Failed to connect to the WiFi network"];
-			    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-			}
-		    }
-		}];	
 		
 		
 	// PARAMETERS FILLED	
