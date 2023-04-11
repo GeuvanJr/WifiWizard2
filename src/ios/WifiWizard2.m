@@ -89,51 +89,54 @@
 
 - (void)iOSConnectNetwork:(CDVInvokedUrlCommand*)command {
     
+	
+	
     __block CDVPluginResult *pluginResult = nil;
 
-	NSString * ssidString;
-	NSString * passwordString;
-	NSDictionary* options = [[NSDictionary alloc]init];
+    NSString *ssidString;
+    NSString *usernameString;
+    NSString *passwordString;
+    NSString *eapTypeString;
+    NSDictionary *options = [command argumentAtIndex:0];
 
-	options = [command argumentAtIndex:0];
-	ssidString = [options objectForKey:@"Ssid"];
-	passwordString = [options objectForKey:@"Password"];
+    ssidString = [options objectForKey:@"Ssid"];
+    usernameString = [options objectForKey:@"Username"];
+    passwordString = [options objectForKey:@"Password"];
+    eapTypeString = [options objectForKey:@"EapType"];
 
-	if (@available(iOS 11.0, *)) {
-	    if (ssidString && [ssidString length]) {
-			NEHotspotConfiguration *configuration = [[NEHotspotConfiguration
-				alloc] initWithSSID:ssidString 
-					passphrase:passwordString 
-						isWEP:(BOOL)false];
+    if (@available(iOS 11.0, *)) {
+        if (ssidString && [ssidString length]) {
+            NSMutableDictionary *eapSettings = [[NSMutableDictionary alloc] init];
+            [eapSettings setObject:usernameString forKey:(__bridge id)kNEHotspotConfigurationEAPUsername];
+            [eapSettings setObject:passwordString forKey:(__bridge id)kNEHotspotConfigurationEAPPassword];
+            [eapSettings setObject:eapTypeString forKey:(__bridge id)kNEHotspotConfigurationEAPType];
 
-			configuration.joinOnce = false;
-            
+            NEHotspotEAPSettings *settings = [[NEHotspotEAPSettings alloc] initWithDictionary:eapSettings];
+
+            NEHotspotConfiguration *configuration = [[NEHotspotConfiguration alloc] initWithSSID:ssidString eapSettings:settings];
+
+            configuration.joinOnce = false;
+
             [[NEHotspotConfigurationManager sharedManager] applyConfiguration:configuration completionHandler:^(NSError * _Nullable error) {
-                
                 NSDictionary *r = [self fetchSSIDInfo];
-                
-                NSString *ssid = [r objectForKey:(id)kCNNetworkInfoKeySSID]; //@"SSID"
-                
-                if ([ssid isEqualToString:ssidString]){
+                NSString *ssid = [r objectForKey:(id)kCNNetworkInfoKeySSID];
+
+                if ([ssid isEqualToString:ssidString]) {
                     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:ssidString];
-                }else{
+                } else {
                     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description];
                 }
-                [self.commandDelegate sendPluginResult:pluginResult
-                                            callbackId:command.callbackId];
+
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
             }];
-
-
-		} else {
-			pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"SSID Not provided"];
-            [self.commandDelegate sendPluginResult:pluginResult
-                                        callbackId:command.callbackId];
-		}
-	} else {
-		pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"iOS 11+ not available"];
-        [self.commandDelegate sendPluginResult:pluginResult
-                                    callbackId:command.callbackId];
-	}
+        } else {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"SSID not provided"];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        }
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"iOS 11+ not available"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
 }
 
 
