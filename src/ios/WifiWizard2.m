@@ -88,6 +88,16 @@
 
 }
 
+
+- (void)iOSConnectNetworkEnterprise:(CDVInvokedUrlCommand*)command {
+
+
+
+}
+
+
+
+
 - (void)iOSConnectOpenNetwork:(CDVInvokedUrlCommand*)command {
 
     __block CDVPluginResult *pluginResult = nil;
