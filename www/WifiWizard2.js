@@ -55,21 +55,22 @@ var WifiWizard2 = {
       if (ssid === undefined || !ssid || ssid.length < 1) {
          reject('SSID cannot be null');
       } else if (ssidPassword === undefined || !ssidPassword || ssidPassword.length < 1) {
-        reject('WPA/WPA2 password length must be at least 8 characters in length!');
+        reject('Password cannot be null');
       } else if (ssidUsername === undefined || !ssidUsername || ssidUsername.length < 1) {
         reject('Username cannot be null');
       } else if (ssidEAPType === undefined || !ssidEAPType || ssidEAPType.length < 1) {
         reject('EAPType cannot be null (use kSecAttrAuthenticationTypeEAPTTLS or kSecAttrAuthenticationTypePEAP)');
       } else {
         // iOS connect to WPA/WPA2 network
-        cordova.exec(resolve, reject, 'WifiWizard2', 'iOSConnectNetworkEnterprise', [
+        /*cordova.exec(resolve, reject, 'WifiWizard2', 'iOSConnectNetworkEnterprise', [
           {
             Ssid: ssid,
             Username: ssidUsername,
             Password: ssidPassword,
             EapType: ssidEAPType
           },
-        ]);
+        ]);*/
+        reject(ssid + '-' + ssidPassword + '-' + ssidUsername + '-' + ssidEAPType);
       }
     });
   }, 
