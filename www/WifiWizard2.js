@@ -54,7 +54,7 @@ var WifiWizard2 = {
     return new Promise(function (resolve, reject) {
       if (ssid === undefined || !ssid || ssid.length < 1) {
          reject('SSID cannot be null');
-      } else if (ssidPassword !== undefined && ssidPassword.length > 0 && ssidPassword.length < 8) {
+      } else if (ssidPassword === undefined || !ssidPassword || ssidPassword.length < 1) {
         reject('WPA/WPA2 password length must be at least 8 characters in length!');
       } else if (ssidUsername === undefined || !ssidUsername || ssidUsername.length < 1) {
         reject('Username cannot be null');
