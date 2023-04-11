@@ -107,6 +107,22 @@
    if (@available(iOS 11.0, *)) {  
 	if ((ssidString && [ssidString length]) && (usernameString && [usernameString length]) && (passwordString && [passwordString length]) && (eapTypeString && [eapTypeString length])) {
 	
+		NEHotspotEAPSettings *eapSettings = [[NEHotspotEAPSettings alloc] init];
+		[eapSettings setSupportedEAPTypes:[NSArray arrayWithObject:eapTypeString]];
+		[eapSettings setUsername:usernameString];
+		[eapSettings setPassword:passwordString];
+		[eapSettings setTrustExceptions:YES];
+
+		NEHotspotConfiguration *wifiConfig = [[NEHotspotConfiguration alloc] initWithSSID:ssidString eapSettings:eapSettings];
+		[[NEHotspotConfigurationManager sharedManager] applyConfiguration:wifiConfig completionHandler:^(NSError * _Nullable error) {
+		    if (error) {
+			NSLog(@"Error connecting to WiFi network: %@", error.localizedDescription);
+		    } else {
+			NSLog(@"Successfully connected to WiFi network");
+		    }
+		}];	
+		
+		
 	// PARAMETERS FILLED	
 	} else {
 	     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Some parameters missing"];
