@@ -112,11 +112,10 @@
 		[configEapSettings setSupportedEAPTypes:@[eapTypeString]];
 		[configEapSettings setUsername:usernameString];
 		[configEapSettings setPassword:passwordString];
-		//[configEapSettings setTrustExceptions:YES];
 		
 		NEHotspotConfiguration *configuration = [[NEHotspotConfiguration alloc] initWithSSID:ssidString eapSettings:configEapSettings];
 		configuration.joinOnce = false;
-
+		
             	[[NEHotspotConfigurationManager sharedManager] applyConfiguration:configuration completionHandler:^(NSError * _Nullable error) {
                 
                 NSDictionary *r = [self fetchSSIDInfo];
