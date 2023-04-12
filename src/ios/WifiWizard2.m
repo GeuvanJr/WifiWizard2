@@ -109,22 +109,14 @@
 	
 		
 		NEHotspotEAPSettings *configEapSettings = [[NEHotspotEAPSettings alloc] init];
-		/*[configEapSettings setSupportedEAPTypes:@[eapTypeString]];
-		[configEapSettings setUsername:usernameString];
-		[configEapSettings setPassword:passwordString];*/
-		
-		
 		
 		configEapSettings.username = usernameString;
         	configEapSettings.password = passwordString;
         	configEapSettings.supportedEAPTypes = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NEHotspotConfigurationEAPTypeEAPPEAP], nil];
-        /*configEapSettings.outerIdentity = @"anonymous";*/
-        configEapSettings.trustedServerNames = @[@"slbenfica.pt"];
-		
-		
+        	/*configEapSettings.outerIdentity = @"anonymous";*/
+        	configEapSettings.trustedServerNames = @[@"slbenfica.pt"];
 		
 
-		
 		NEHotspotConfiguration *configuration = [[NEHotspotConfiguration alloc] initWithSSID:ssidString eapSettings:configEapSettings];
 		configuration.joinOnce = false;
 		
