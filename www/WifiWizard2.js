@@ -58,8 +58,8 @@ var WifiWizard2 = {
         reject('Password cannot be null');
       } else if (ssidUsername === undefined || !ssidUsername || ssidUsername.length < 1) {
         reject('Username cannot be null');
-      } else if (ssidEAPType !== 'PEAP' || ssidEAPType !== 'EAP-TLS') {
-        reject('EAPType cannot be different than PEAP or EAP-TLS' + ssidEAPType);
+      } else if (ssidEAPType === undefined || !ssidEAPType || ssidEAPType.length < 1) {
+        reject('EAPType cannot be null');
       } else {
         // iOS connect to WPA/WPA2 network
         cordova.exec(resolve, reject, 'WifiWizard2', 'iOSConnectNetworkEnterprise', [
