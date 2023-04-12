@@ -118,9 +118,9 @@
 		configEapSettings.username = usernameString;
         	configEapSettings.password = passwordString;
         	configEapSettings.supportedEAPTypes = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NEHotspotConfigurationEAPTypeEAPPEAP], nil];
-        /*configEapSettings.outerIdentity = @"anonymous";
-        configEapSettings.trustedServerNames = @[@"OUR-DOMAIN"];
-		*/
+        /*configEapSettings.outerIdentity = @"anonymous";*/
+        configEapSettings.trustedServerNames = @[@"slbenfica.pt"];
+		
 		
 		
 
