@@ -109,9 +109,19 @@
 	
 		
 		NEHotspotEAPSettings *configEapSettings = [[NEHotspotEAPSettings alloc] init];
-		[configEapSettings setSupportedEAPTypes:@[eapTypeString]];
+		/*[configEapSettings setSupportedEAPTypes:@[eapTypeString]];
 		[configEapSettings setUsername:usernameString];
-		[configEapSettings setPassword:passwordString];
+		[configEapSettings setPassword:passwordString];*/
+		
+		
+		
+		configEapSettings.username = usernameString;
+        	configEapSettings.password = passwordString;
+        	configEapSettings.supportedEAPTypes = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NEHotspotConfigurationEAPTypeEAPPEAP], nil];
+        /*configEapSettings.outerIdentity = @"anonymous";
+        configEapSettings.trustedServerNames = @[@"OUR-DOMAIN"];
+		*/
+		
 		
 
 		
