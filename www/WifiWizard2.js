@@ -1,4 +1,4 @@
-/*
+ /*
  * Copyright 2018 Myles McNamara
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,7 +46,7 @@ var WifiWizard2 = {
    * @param ssid
    * @param ssidPassword  Password if connecting to WPA/WPA2 network 
    * @param ssidUsername  Username if connecting to WPA/WPA2 network 
-   * @param ssidEAPType   EAPType: kSecAttrAuthenticationTypeEAPTTLS or kSecAttrAuthenticationTypePEAP
+   * @param ssidEAPType   EAPType: PEAP or EAP-TLS
    * @returns {Promise}
   */
   
