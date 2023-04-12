@@ -108,15 +108,12 @@
 	if ((ssidString && [ssidString length]) && (usernameString && [usernameString length]) && (passwordString && [passwordString length]) && (eapTypeString && [eapTypeString length])) {
 	
 		
-		/*NEHotspotEAPSettings *configEapSettings = [[NEHotspotEAPSettings alloc] init];
+		NEHotspotEAPSettings *configEapSettings = [[NEHotspotEAPSettings alloc] init];
 		[configEapSettings setSupportedEAPTypes:@[eapTypeString]];
 		[configEapSettings setUsername:usernameString];
-		[configEapSettings setPassword:passwordString];*/
+		[configEapSettings setPassword:passwordString];
 		
-		NEHotspotEAPSettings *configEapSettings = [[NEHotspotEAPSettings alloc] initWithEAPType:eapTypeString];
-		configEapSettings.username = usernameString;
-		configEapSettings.password = passwordString;
-		
+
 		
 		NEHotspotConfiguration *configuration = [[NEHotspotConfiguration alloc] initWithSSID:ssidString eapSettings:configEapSettings];
 		configuration.joinOnce = false;
