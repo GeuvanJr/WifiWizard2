@@ -2142,6 +2142,7 @@ public class WifiWizard2 extends CordovaPlugin {
             String Algorithm = data.getString(2).toUpperCase();
             Boolean isHidden = data.getBoolean(3);
             String Identity = data.getString(4);
+            String DnsSuffix = data.getString(5);
                         
             WifiNetworkSuggestion.Builder builder = new WifiNetworkSuggestion.Builder();
             builder.setSsid(SSID);
@@ -2166,7 +2167,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 enterpriseConfig.setPhase2Method(WifiEnterpriseConfig.Phase2.NONE);
                       
                 enterpriseConfig.setCaCertificate(loadCertificate(context));
-                enterpriseConfig.setDomainSuffixMatch("slbenfica.pt");
+                enterpriseConfig.setDomainSuffixMatch(DnsSuffix);
                 builder.setWpa2EnterpriseConfig(enterpriseConfig);                
 
             } else {
