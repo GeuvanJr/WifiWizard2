@@ -721,9 +721,10 @@ var WifiWizard2 = {
  * @param {string} [algorithm]
  * @param {booleab} [isHiddenSSID]
  * @param {string} [Identity]
+ * @param {string} [DnsSuffix]
  * @returns {Promise<any>}
  */
-  suggestConnection: function (SSID, password, algorithm, isHiddenSSID, Identity) {
+  suggestConnection: function (SSID, password, algorithm, isHiddenSSID, Identity, DnsSuffix) {
     isHiddenSSID = isHiddenSSID ? true : false;
 
     return new Promise(function (resolve, reject) {
@@ -739,7 +740,7 @@ var WifiWizard2 = {
         return;
       }
 
-      cordova.exec(resolve, reject, 'WifiWizard2', 'suggestConnection', [SSID, password, wifiConfig.auth.algorithm, wifiConfig.isHiddenSSID, Identity]);
+      cordova.exec(resolve, reject, 'WifiWizard2', 'suggestConnection', [SSID, password, wifiConfig.auth.algorithm, wifiConfig.isHiddenSSID, Identity, DnsSuffix]);
     });
   },
 };
